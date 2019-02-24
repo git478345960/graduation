@@ -1,0 +1,41 @@
+.typeWrap{
+    height:100%;
+    display: flex; 
+    justify-content:center;
+    align-items:center;
+    .rowWrap{
+        height: 85%;
+        width: 95%;
+        .rowList{
+            height:40px;
+            border:1px solid black;
+            margin-top:18px;
+            line-height:40px;
+            dl{
+                font-size:14px;
+                dt{
+                    padding-left:8px;
+                    float:left;
+                    font-size:16px;
+                    font-weight:bold;
+                    margin-right:10px;
+                }
+                dd{
+                    float:left;
+                    margin-right:10px;
+                    &:hover{
+                        text-decoration: underline;
+                        color:green;
+                    }
+                }
+            }
+           
+        }
+        .icon{
+            float:right;
+            padding-right:5px;
+        }
+        
+    }
+    
+}

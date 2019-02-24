@@ -1,0 +1,24 @@
+.content {
+    height: 200px;
+
+    margin: 0 auto;
+  
+    .account{
+        width:80%;
+        margin:0 auto;
+        display:block;
+        padding: 20px;
+    }
+    .passWorld{
+        width:80%;
+        margin:0 auto;
+        display:block;
+    }
+    .btn{
+      margin:20px auto;
+      width:80%;
+      .el-button{
+          width:100%;
+      }
+    }
+  }
