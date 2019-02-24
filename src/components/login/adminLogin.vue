@@ -27,4 +27,5 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/login/login.scss";
 
+
 </style>
