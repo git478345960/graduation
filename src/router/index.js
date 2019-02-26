@@ -11,6 +11,7 @@ import homePage from '@/components/content/showContent'
 import attention from '@/components/content/attention'
 import notification from '@/components/content/notification'
 import experience from '@/components/content/experience'
+import notificationRight from '@/components/content/notificationRight'
 Vue.use(Router)
 
 export default new Router({
@@ -23,22 +24,29 @@ export default new Router({
       redirect:'homepage',
       children:[
         {
-          path:'homepage',
+          path:'/homepage',
           name:'homepage',
           component: homePage,
         },
         {
-          path:'attention',
+          path:'/attention',
           name:'attention',
           component: attention,
         },
         {
-          path:'notification',
+          path:'/notification',
           name:'notification',
-          component: notification,        
+          component: notification, 
+          children:[
+            {
+              path:'notificationRight/:id?',
+              name:'notificationRight',
+              component:notificationRight,
+            }
+          ]       
         },
         {
-          path:'experience',
+          path:'/experience',
           name:'experience',
           component: experience,        
         },

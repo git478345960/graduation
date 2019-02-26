@@ -3,19 +3,19 @@
     <div class="guider">
       <ul class="guiderList">
         <li>
-          <router-link to="homePage">主页</router-link>
+          <router-link :to="{name:'home'}">主页</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link to="experience">面试心得</router-link>
+          <router-link :to="{name:'experience'}">面试心得</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link to="attention">注意事项</router-link>
+          <router-link :to="{name:'attention'}">注意事项</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link to="notification">消息通告</router-link>
+          <router-link :to="{name:'notification'}">消息通告</router-link>
         </li>
       </ul>
     </div>
