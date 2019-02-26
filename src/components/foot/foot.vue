@@ -3,7 +3,7 @@
     <el-header style="height:90px;">
       <friendLink />
     </el-header>
-    <el-main style ="height:200px;">
+    <el-main style ="height:192px;">
       <footMessage />
     </el-main>
   </el-container>

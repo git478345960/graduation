@@ -7,6 +7,10 @@ import adminLogin from '@/components/login/adminLogin'
 import apartmentLogin from '@/components/login/apartmentLogin'
 import register from '@/components/register/register'
 import blank from '@/components/index/blank'
+import homePage from '@/components/content/showContent'
+import attention from '@/components/content/attention'
+import notification from '@/components/content/notification'
+import experience from '@/components/content/experience'
 Vue.use(Router)
 
 export default new Router({
@@ -15,8 +19,51 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: home
+      component:home,
+      redirect:'homepage',
+      children:[
+        {
+          path:'homepage',
+          name:'homepage',
+          component: homePage,
+        },
+        {
+          path:'attention',
+          name:'attention',
+          component: attention,
+        },
+        {
+          path:'notification',
+          name:'notification',
+          component: notification,        
+        },
+        {
+          path:'experience',
+          name:'experience',
+          component: experience,        
+        },
+      ]
     },
+    // {
+    //   path: '/homePage',
+    //   name: 'homePage',
+    //   compnent: homePage
+    // },
+    // {
+    //   path: '/showContent',
+    //   name: 'showContent',
+    //   component: showContent
+    // },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: home
+    // },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: home
+    // },
     {
       path: '/blank',
       name: 'blank',

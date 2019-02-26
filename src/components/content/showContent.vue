@@ -24,8 +24,8 @@ export default {
 
 <style scoped>
 .showWrap {
-  width: 1000px;
-  height: 341px;
+  width: 1300px;
+  height: 540px;
   background-color: #fff;
   margin: 0 auto;
   border: 1px solid black;

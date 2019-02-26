@@ -1,9 +1,14 @@
 .sliderWrap{
+    .wrapContent{
+        .container{
+            height:100%;
+        }
+    }
     .imgWrap{
-        height:100%;
+        height:500px;
         width:100%;
         img{
-            height:100%;
+            height:500px;
             width:100%;
         }
     }

@@ -34,7 +34,7 @@ export default {};
 
 <style lang="scss" scoped>
 .footMessage {
-  width: 1000px;
+  width: 1300px;
   margin: 0 auto;
   height: 100%;
   .footRow {

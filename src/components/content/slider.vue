@@ -1,6 +1,6 @@
 <template>
   <div class="sliderWrap">
-    <el-carousel :interval="5000" arrow="hover">
+    <el-carousel :interval="5000" arrow="hover" height="500px">
       <el-carousel-item v-for="(item,index) in imgUrl" :key="item + '_' + index">
         <el-row class = "imgWrap">
             <img :src="item.idView">
@@ -27,11 +27,17 @@ export default {
 
 
 <style scoped>
+.el-carousel__item{
+  height:500px;
+}
+div .el-carousel__container{
+  height:500px;
+}
 .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
-    line-height: 300px;
+    line-height: 500px;
     margin: 0;
   }
   

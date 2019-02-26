@@ -1,13 +1,13 @@
 <template>
     <div class = "topNav">
      <el-row class ="topCon">
-       <el-col :span = "12" class = "left">
+       <!-- <el-col :span = "12" class = "left">
          <ul>
            <li>肇庆学院</li>
            <li>|</li>
            <li>切换学校</li>
          </ul>
-       </el-col>
+       </el-col> -->
        <el-col :span = "12" class = "right">
          <ul>
            <li>
@@ -46,7 +46,7 @@ export default{
      height:35px;
      width:100%;
      background-color:black;
-     margin:auto;
+     /* margin:auto; */
      .topCon{
        height:100%;
        .left {
@@ -68,6 +68,7 @@ export default{
          }
        }
        .right{
+         float:right;
          ul{
            padding-right:60px;
            float:right;
