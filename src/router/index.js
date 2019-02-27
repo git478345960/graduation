@@ -2,16 +2,19 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/page/home'
 import login from '@/page/login'
+import register from '@/page/register'
+import studentRegister from '@/components/register/studentRegister'
+import apartmentRegister from '@/components/register/apartmentRegister'
 import studentLogin from '@/components/login/studentLogin'
 import adminLogin from '@/components/login/adminLogin'
 import apartmentLogin from '@/components/login/apartmentLogin'
-import register from '@/components/register/register'
 import blank from '@/components/index/blank'
 import homePage from '@/components/content/showContent'
 import attention from '@/components/content/attention'
 import notification from '@/components/content/notification'
 import experience from '@/components/content/experience'
 import notificationRight from '@/components/content/notificationRight'
+
 Vue.use(Router)
 
 export default new Router({
@@ -99,7 +102,26 @@ export default new Router({
               component: adminLogin,
             }
           ]
-        }
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: register,
+          redirect:'register/studentRegister',
+          children:[
+            {
+              path: ':name',
+              name: 'studentRegister',
+              component: studentRegister,
+            },
+            {
+              path: ':name',
+              name: 'apartmentRegister',
+              component: apartmentRegister,
+            }
+            
+          ]
+        },
       ]     
     }
     

@@ -17,7 +17,7 @@
                 <router-view class="loginBox"></router-view>
             </el-row>
             <el-row class="register">
-                <el-button type="success" class="registerBtn">立即注册</el-button>
+                <el-button type="success" class="registerBtn"><a href="http://localhost:8081/blank/register">去注册</a></el-button>
             </el-row>
         </el-row>
     </div>
