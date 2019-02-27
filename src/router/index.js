@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import home from '@/page/home'
 import login from '@/page/login'
 import register from '@/page/register'
+import searchDetail from '@/page/searchDetail'
+import searchContent from '@/page/searchContent'
 import studentRegister from '@/components/register/studentRegister'
 import apartmentRegister from '@/components/register/apartmentRegister'
 import studentLogin from '@/components/login/studentLogin'
@@ -55,26 +57,6 @@ export default new Router({
         },
       ]
     },
-    // {
-    //   path: '/homePage',
-    //   name: 'homePage',
-    //   compnent: homePage
-    // },
-    // {
-    //   path: '/showContent',
-    //   name: 'showContent',
-    //   component: showContent
-    // },
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: home
-    // },
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: home
-    // },
     {
       path: '/blank',
       name: 'blank',
@@ -123,6 +105,16 @@ export default new Router({
           ]
         },
       ]     
+    },
+    {
+      path: '/searchContent',
+      name: 'searchContent',
+      component: searchContent,
+    },
+    {
+      path: '/searchDetail',
+      name: 'searchDetail',
+      component: searchDetail,
     }
     
     
