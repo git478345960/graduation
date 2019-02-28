@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import home from '@/page/home'
 import login from '@/page/login'
 import register from '@/page/register'
+import personal from '@/page/personal'
 import searchDetail from '@/page/searchDetail'
 import searchContent from '@/page/searchContent'
 import studentRegister from '@/components/register/studentRegister'
@@ -115,7 +116,12 @@ export default new Router({
       path: '/searchDetail',
       name: 'searchDetail',
       component: searchDetail,
-    }
+    },
+    {
+      path:'/personal',
+      name:'/personal',
+      component:personal
+    },
     
     
     

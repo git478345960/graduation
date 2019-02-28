@@ -67,10 +67,6 @@ export default {
   .serchBarWrap{
     height:132px;
   }
-  .contentshow{
-    /* height:1300px; */
-    
-  }
 }
 
 </style>

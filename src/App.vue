@@ -19,4 +19,9 @@ export default {
   li{
     list-style:none;
   }
+
+  .experienceWrap .el-collapse-item__header{
+    font-size:20px;
+    font-weight:800;
+}
 </style>
