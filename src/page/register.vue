@@ -22,7 +22,7 @@
         <router-view class="registerBox"></router-view>
       </el-row>
       <el-row class="register">
-        <el-button type="success" class="registerBtn"><a href="http://localhost:8081/blank/login/studentLogin">去登录</a></el-button>
+        <el-button type="success" class="registerBtn"><a href="http://localhost:8081/login/studentLogin">去登录</a></el-button>
       </el-row>
     </el-row>
   </div>

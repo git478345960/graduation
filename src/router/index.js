@@ -17,7 +17,7 @@ import attention from '@/components/content/attention'
 import notification from '@/components/content/notification'
 import experience from '@/components/content/experience'
 import notificationRight from '@/components/content/notificationRight'
-
+import experienceDetail from '@/components/content/experienceDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -58,54 +58,54 @@ export default new Router({
         },
       ]
     },
+    // {
+    //   path: '/blank',
+    //   name: 'blank',
+    //   component: blank,
+    //   children:[
+    //   ]     
+    // },
     {
-      path: '/blank',
-      name: 'blank',
-      component: blank,
+      path: '/login',
+      name: 'login',
+      component: login,
+      redirect:'login/studentLogin',
       children:[
         {
-          path: 'login',
-          name: 'login',
-          component: login,
-          redirect:'login/studentLogin',
-          children:[
-            {
-              path: ':name',
-              name: 'studentLogin',
-              component: studentLogin,
-            },
-            {
-              path: ':name',
-              name: 'apartmentLogin',
-              component: apartmentLogin,
-            },
-            {
-              path: ':name',
-              name: 'adminLogin',
-              component: adminLogin,
-            }
-          ]
+          path: ':name',
+          name: 'studentLogin',
+          component: studentLogin,
         },
         {
-          path: 'register',
-          name: 'register',
-          component: register,
-          redirect:'register/studentRegister',
-          children:[
-            {
-              path: ':name',
-              name: 'studentRegister',
-              component: studentRegister,
-            },
-            {
-              path: ':name',
-              name: 'apartmentRegister',
-              component: apartmentRegister,
-            }
-            
-          ]
+          path: ':name',
+          name: 'apartmentLogin',
+          component: apartmentLogin,
         },
-      ]     
+        {
+          path: ':name',
+          name: 'adminLogin',
+          component: adminLogin,
+        }
+      ]
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register,
+      redirect:'register/studentRegister',
+      children:[
+        {
+          path: ':name',
+          name: 'studentRegister',
+          component: studentRegister,
+        },
+        {
+          path: ':name',
+          name: 'apartmentRegister',
+          component: apartmentRegister,
+        }
+        
+      ]
     },
     {
       path: '/searchContent',
@@ -119,9 +119,20 @@ export default new Router({
     },
     {
       path:'/personal',
-      name:'/personal',
+      name:'personal',
       component:personal
     },
+    {
+      path:'/experienceDetail/:id?',
+      name:'experienceDetail',
+      component:experienceDetail
+    },
+    {
+      path:'/blank/:id?',
+      name:'blank',
+      component:blank,
+      redirect:'experienceDetail',
+    }
     
     
     

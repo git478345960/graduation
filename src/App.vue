@@ -24,4 +24,10 @@ export default {
     font-size:20px;
     font-weight:800;
 }
+.formMessage .el-form-item{
+  margin-bottom:20px;
+}
+.formMessage .el-textarea__inner{
+  height:100px;
+}
 </style>

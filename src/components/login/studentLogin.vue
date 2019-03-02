@@ -21,6 +21,11 @@ export default {
   },
   methods:{
     submit() {
+      // api.getExperience({
+
+      // }).then(res =>{
+      //   console.log(res)
+      // }),
             api.login({
                 userName: this.username,
                 password: this.password

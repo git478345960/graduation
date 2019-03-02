@@ -5,19 +5,55 @@
       <h3>让自己少走弯路</h3>
     </div>
     <div class="experienceContent">
-      <ul>
-        <li><a href="#"><h1>title</h1><p>contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</p></a></li>
-        <li><a href="#"><h1>title</h1><p>contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</p></a></li>
-        <li><a href="#"><h1>title</h1><p>contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</p></a></li>
-        <li><a href="#"><h1>title</h1><p>contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</p></a></li>
-        <li><a href="#"><h1>title</h1><p>contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent</p></a></li>
-      </ul>
+      <!-- <ul> -->
+        <!-- <li @click="jump(item.id)" v-for="(item,index) in dataList" :key="index"><a href="#"><h1>{{item.title}}</h1><p>{{item.content}}</p></a></li> -->
+      <!-- </ul> -->
+      <router-link v-for="(item,index) in dataList" :key="index" class = "nameList" :to = "{name:'experienceDetail',params:{id:item.id}}">
+        <h1>{{index+1}}.{{item.title}}</h1>
+        <p>{{item.content}}</p>
+        </router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import api from '@/api/index.js'
+export default {
+  data(){
+    return {
+      dataList : [],
+    }
+  },
+   created:function(){
+     api.getExperience().then(res => {
+       if(res.status === 200){
+        //  this.dataList = res.data;
+         console.log(res.data);
+         [...this.dataList] = res.data;
+         console.log(this.dataList)
+        //  console.log(this.dataList);
+       }
+     })
+     },
+    //  updated:function(){
+    //    api.getExperience().then(res => {
+    //    if(res.status === 200){
+    //     //  this.dataList = res.data;
+    //      console.log(res.data);
+    //      [...this.dataList] = res.data;
+    //      console.log(this.dataList)
+    //     //  console.log(this.dataList);
+    //    }
+    //  })
+    //  },
+     methods:{
+       jump(id){
+         api.getDetailExperience({id:id}).then(res =>{
+           console.log(res);
+         })
+       }
+     }
+};
 </script>
 
 <style lang = "scss" scoped>
@@ -50,19 +86,16 @@ export default {};
   }
   .experienceContent{
     height:490px;
-    ul{
-      li{
+      .nameList{
         float:left;
         width:627px;
         height:80px;
         padding:10px;
         margin-bottom:2px;
         margin-right:2px;
-        /* border-bottom:1px dashed grey; */
+        border-bottom:1px dashed grey;
         border-right:1px dashed grey;
-        a{
-          text-decoration: none;
-          
+        text-decoration: none;
           h1{
             padding:5px;
             color:#333;
@@ -80,8 +113,7 @@ export default {};
           
         }
         
-      }
-    }
+    
   }
 }
 </style>
