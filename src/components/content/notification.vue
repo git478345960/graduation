@@ -2,16 +2,18 @@
   <el-container class="notificationWrap">
     <el-aside width="450px">
       <el-row class="noticeContent">
-        <ul>
-           <li v-for="(item,index) in newList.slice(0,9)" :key="index" >
+        <!-- <ul>
+           <li v-for="(item,index) in newList" :key="index" >
              <el-col :span="19">
                <router-link :to = "{name: 'notificationRight',params:{id:item.id}}"><h3>{{item.title}}</h3></router-link>
              </el-col>
              <el-col :span="5" class="newsTime">{{item.time}}</el-col>
            </li>
-           
-           
-        </ul>
+        </ul> -->
+         <router-link v-for="(item,index) in newList" :key="index" :to = "{name: 'notificationRight',params:{id:item.id}}" class="linkTo" @click.native="flush">
+           <el-col :span="17"><h1>{{item.title}}</h1></el-col>
+           <el-col :span="7"><p>{{item.time}}</p></el-col>
+         </router-link>
       </el-row>
     </el-aside>
     <el-main>
@@ -21,35 +23,24 @@
 </template>
 
 <script>
+import api from "@/api/index.js";
 export default {
   data(){
     return {
-      newList:[
-        {
-          id:1,
-          title: '今天下大雨',
-          content: '今天全国各地都下大雪',
-          time:'2/26'
-        },
-        {
-          id:2,
-          title: '下大雪',
-          content: '到大是多湿哒哒所送达',
-          time:'2/26'
-        },
-        {
-          id:3,
-          title: '今天是的撒雨',
-          content: '今天湿哒哒所多所多撒雪',
-          time:'2/26'
-        },
-        {
-          id:4,
-          title: '今天电放费雨',
-          content: '按时送达非凡哥',
-          time:'2/26'
-        },
-      ]
+      newList:[]
+    }
+  },
+  created:function(){
+    api.getMessageInfo().then(res =>{
+      [...this.newList] = res.data;
+      // console.log(res.data);
+      console.log(this.newList);
+    })
+  },
+  methods:{
+    flush(){
+      this.$router.go(0);
+
     }
   }
 };
@@ -57,22 +48,34 @@ export default {
 
 <style scoped>
 .notificationWrap {
-  width: 1500px;
+  width: 1300px;
   height: 540px;
   background-color: #fff;
   margin: 0 auto;
   /* border: 1px solid black; */
 }
-.notificationWrap .noticeContent{
+.notificationWrap .noticeContent {
   padding:25px;
-  height:100%;
+  height:100px;
+  width:100%;
 }
-.notificationWrap .noticeContent ul li{
+.notificationWrap .noticeContent .linkTo{
+  height:41px;
+  width:100%;
+  display: block;;
+}
+.notificationWrap .noticeContent .linkTo:hover h1,
+.notificationWrap .noticeContent .linkTo:hover p{
+  color:#00b38a;
+}
+.notificationWrap .noticeContent h1{
   margin-bottom:20px;
   padding:10px;
-  font-size:18px;
+  /* font-size:18px; */
+  font-weight:bold;
+  color:#333;
 }
-.notificationWrap .noticeContent ul li .newsTime{
+.notificationWrap .noticeContent p{
   color:#999999;
 }
 
@@ -93,7 +96,7 @@ export default {
 }
 
 .el-main {
-  background-color: #e9eef3;
+  background-color: #fff;
   color: #333;
   /* text-align: center; */
   /* line-height: 160px; */

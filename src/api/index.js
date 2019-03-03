@@ -13,8 +13,12 @@ const api = {
   getMessageInfo(){
     return axios.get('/getMessageInfo')
   },
-  getPartTimeInfo(){
-    return axios.get('/getPartTimeInfo')
+  getMessage(params){
+    return axios.get('/getMessageInfo',{params})
+  },
+  // 传入hiring时返回对象数组，传入id时返回某个对象
+  getPartTimeInfos(params){
+    return axios.get('/getPartTimeInfo',{params})
   },
   getMyResume(){
     return axios.get('/getMyResume')

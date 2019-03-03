@@ -108,12 +108,12 @@ export default new Router({
       ]
     },
     {
-      path: '/searchContent',
+      path: '/searchContent/:hiring?',
       name: 'searchContent',
       component: searchContent,
     },
     {
-      path: '/searchDetail',
+      path: '/searchDetail/:id?',
       name: 'searchDetail',
       component: searchDetail,
     },

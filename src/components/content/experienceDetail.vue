@@ -66,11 +66,11 @@ export default {
       //  console.log(res.data);
       this.dataList = res.data;
       this.dataListArray = this.dataList.content.split('。');
-      console.log(this.dataListArray);
+      // console.log(this.dataListArray);
     });
     api.getExperience().then(res => {
       [...this.dataArray] = res.data;
-      console.log(this.dataArray);
+      // console.log(this.dataArray);
       let that = this;
       this.dataArray = this.dataArray.filter(function(ele, index) {
         if (ele.id !== that.$route.params.id) {

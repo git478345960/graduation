@@ -10,7 +10,7 @@
           <el-row class="detailTop">
             <el-row class="company">{{dataList.name}}</el-row>
             <el-row class="hiring">{{dataList.hiring}}</el-row>
-            <el-row class="treatment">{{dataList.treatment}}</el-row>
+            <el-row class="treatment">{{dataList.treatment}}-{{dataList.treatment + 2}}k/{{dataList.location}}</el-row>
             <el-row class="holdOn">
               <button :plain="true" @click="open">投个简历/已投递</button>
             </el-row>
@@ -19,19 +19,15 @@
             <el-col :span="18" class="colDetail">
               <el-row>
                 <span class="detailTitle">职位诱惑:</span>
-                <p>放大法大师傅撒发射点发撒大师傅撒发顺丰的撒飞洒发士大夫萨芬</p>
-                <p>1</p>
+                <p>{{dataList.advantage}}</p>
               </el-row>
               <el-row>
                 <span class="detailTitle">职位描述:</span>
-                <p>1</p>
-                <p>1</p>
+                <p>{{dataList.responsibility}}</p>
               </el-row>
-
               <el-row>
                 <span class="detailTitle">工作地址:</span>
-                <p>1</p>
-                <p>1</p>
+                <p>{{dataList.location}}</p>
               </el-row>
             </el-col>
             <el-col :span="6" class="colDetail colDetailRight">
@@ -50,6 +46,7 @@
 </template>
 
 <script scoped>
+import api from "@/api/index.js";
 import topNav from "@/components/header/topNav";
 import searchBar from "@/components/header/searchBar";
 import foot from "@/components/foot/foot";
@@ -57,17 +54,8 @@ import guider from "@/components/header/guider";
 export default {
   data() {
     return {
-      dataList: {
-        name: "肇庆大公司",
-        hiring: "前端开发",
-        treatment: "3k",
-        location: "地点",
-        contation: "联系方式",
-        companyMessage:
-          "公司按时发大水发打发撒旦法发大水发达阿斯顿发发顺丰的飒飒发沙发沙发发答案是否风飒飒的算法发顺丰打法是否",
-        requirements: "精通什么什么",
-        responsibility: "职位afsafdasd啥打法是否大是大非责任"
-      }
+      dataList: {},
+      id:this.$route.params.id
     };
   },
   components: {
@@ -83,6 +71,16 @@ export default {
           type: 'success'
         });
       },
+  },
+  created:function(){
+    api.getPartTimeInfos({id:this.id})
+            .then(res => {
+                if(res.status === 200){
+                    console.log(res);
+                    this.dataList = res.data;
+                }
+               
+            })
   }
 };
 </script>

@@ -6,80 +6,36 @@
         <guider/>
       </el-header>
       <el-main width="542px">
-        <el-row class="searchContent">
-          <ul>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li class="oneContent">
-              <el-row class="firstRow">
-                <el-col :span="12" class="firstLeft colContent" >left</el-col>
-                <el-col :span="12" class="firstRight colContent">right</el-col>
-              </el-row>
-              <el-row class="secRow">
-                <el-col :span="12" class="secLeft colContent">left</el-col>
-                <el-col :span="12" class="secRight colContent">right</el-col>
-              </el-row>
-            </li>
-            <li style="text-align:center;color:red">分页区（暂定)</li>
-          </ul>
+        <el-row class="searchContent" :data="dataList.slice((currentPage-1)*pagesize,currentPage*pagesize)">
+          <router-link
+            class="contentBox"
+            v-for="(item,index) in dataList"
+            :key="index"
+            :to="{name: 'searchDetail', params: {hiring: item.hiring}}"
+            prop="date"
+          >
+            <el-row>
+              <el-col :span="12">
+                <h3>{{item.hiring}}</h3>
+              </el-col>
+              <el-col :span="12">{{item.companyName}}</el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12"><span class="treatment">{{item.treatment}}-{{item.treatment+2}}k</span><span>{{item.location}}</span></el-col>
+              <el-col :span="12">{{item.companyMessage}}</el-col>
+            </el-row>
+          </router-link>
+        </el-row>
+        <el-row style="text-align:center;" >
+          <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage"
+                            :page-sizes="[5, 10, 20, 40]" 
+                            :page-size="pagesize"         
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="dataList.length">  
+                    </el-pagination>
         </el-row>
       </el-main>
       <el-footer height="308px">
@@ -90,25 +46,44 @@
 </template>
 
 <script scoped>
+import api from "@/api/index.js";
 import topNav from "@/components/header/topNav";
 import searchBar from "@/components/header/searchBar";
 import foot from "@/components/foot/foot";
 import guider from "@/components/header/guider";
 export default {
-  data(){
+  data() {
     return {
-      dataList : [
-        {
-          
-        }
-      ]
-    }
+      hiring: "",
+      dataList: [],
+      currentPage:1, //初始页
+      pagesize:5,    //    每页的数据
+    };
   },
   components: {
     topNav,
     searchBar,
     foot,
     guider
+  },
+  created: function() {
+    this.hiring = this.$route.params.hiring;
+    api.getPartTimeInfos({ hiring: this.hiring }).then(res => {
+      if (res.status === 200) {
+        [...this.dataList] = res.data;
+      }
+    });
+  },
+  methods:{
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+        handleSizeChange: function (size) {
+                this.pagesize = size;
+                console.log(this.pagesize)  //每页下拉显示数据
+        },
+        handleCurrentChange: function(currentPage){
+                this.currentPage = currentPage;
+                console.log(this.currentPage)  //点击第几页
+        },
   }
 };
 </script>
@@ -119,23 +94,39 @@ export default {
   padding: 0;
 }
 .searchWrap {
-
   .searchContent {
-    width: 1190px;
+    width: 1300px;
     margin: 0 auto;
-    /* padding: 10px; */
-    
-    .oneContent{
-      border: 1px solid #ededed;
-      padding:10px;
-      .firstRow{
-        height:34px;
-      }
-      .secRow{
-        height:24px;
-      }
-      .colContent{
-        height:100%;
+    .contentBox {
+      float: left;
+      width: 1227px;
+      height: 80px;
+      padding: 10px;
+      margin-bottom: 2px;
+      margin-right: 2px;
+      border-bottom: 1px dashed grey;
+      border-right: 1px dashed grey;
+      border-left: 1px dashed grey;
+      text-decoration: none;
+      .el-col {
+        height: 40px;
+        h3 {
+          float: left;
+          max-width: 272px;
+          margin: 0;
+          font-size: 20px;
+          color: #00b38a;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-wrap: normal;
+          font-weight: 400;
+        }
+        .treatment{
+              margin-right: 1em;
+              font-size: 16px;
+              color: #fd5f39;
+        }
       }
     }
   }
