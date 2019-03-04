@@ -6,10 +6,10 @@
         <guider/>
       </el-header>
       <el-main width="542px">
-        <el-row class="searchContent" :data="dataList.slice((currentPage-1)*pagesize,currentPage*pagesize)">
+        <el-row class="searchContent">
           <router-link
             class="contentBox"
-            v-for="(item,index) in dataList"
+            v-for="(item,index) in dataList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
             :key="index"
             :to="{name: 'searchDetail', params: {hiring: item.hiring}}"
             prop="date"
@@ -54,6 +54,7 @@ import guider from "@/components/header/guider";
 export default {
   data() {
     return {
+      data:[],
       hiring: "",
       dataList: [],
       currentPage:1, //初始页
@@ -78,11 +79,11 @@ export default {
     // 初始页currentPage、初始每页数据数pagesize和数据data
         handleSizeChange: function (size) {
                 this.pagesize = size;
-                console.log(this.pagesize)  //每页下拉显示数据
+                // console.log(this.pagesize)  //每页下拉显示数据
         },
         handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
-                console.log(this.currentPage)  //点击第几页
+                // console.log(this.currentPage)  //点击第几页
         },
   }
 };
