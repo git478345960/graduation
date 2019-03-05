@@ -15,14 +15,20 @@ import blank from '@/components/index/blank'
 import homePage from '@/components/content/showContent'
 import attention from '@/components/content/attention'
 import notification from '@/components/content/notification'
+import oneNotification from '@/components/content/oneNotification'
 import experience from '@/components/content/experience'
 import notificationRight from '@/components/content/notificationRight'
+import oneNotificationRight from '@/components/content/notificationRight'
 import experienceDetail from '@/components/content/experienceDetail'
+import apartment from '@/components/content/apartment'
+import apartmentHome from '@/page/apartmentHome'
+import editorMessage from '@/components/content/editorMessage'
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    //求职用户路由
     {
       path: '/',
       name: 'home',
@@ -58,13 +64,6 @@ export default new Router({
         },
       ]
     },
-    // {
-    //   path: '/blank',
-    //   name: 'blank',
-    //   component: blank,
-    //   children:[
-    //   ]     
-    // },
     {
       path: '/login',
       name: 'login',
@@ -132,7 +131,41 @@ export default new Router({
       name:'blank',
       component:blank,
       redirect:'experienceDetail',
-    }
+    },
+
+    // 公司人员路由
+    {
+      path: '/apartmentHome',
+      name: 'apartmentHome',
+      component:apartmentHome,
+      // redirect:'notification',
+      children:[
+        {
+          path:'/oneNotification',
+          name:'oneNotification',
+          component: oneNotification,
+          children:[
+            {
+              path:'oneNotificationRight/:id?',
+              name:'oneNotificationRight',
+              component: oneNotificationRight,
+            }
+          ]
+        },
+        {
+          path:'apartment',
+          name:'apartment',
+          component: apartment,        
+        },
+        {
+          path:'editorMessage',
+          name:'editorMessage',
+          component: editorMessage, 
+        }
+      ]
+    },
+
+
     
     
     
