@@ -23,6 +23,11 @@ import experienceDetail from '@/components/content/experienceDetail'
 import apartment from '@/components/content/apartment'
 import apartmentHome from '@/page/apartmentHome'
 import editorMessage from '@/components/content/editorMessage'
+import admin from '@/page/admin'
+import company from '@/components/admin/company'
+import job from '@/components/admin/job'
+import message from '@/components/admin/message'
+import publicUser from '@/components/admin/publicUser'
 Vue.use(Router)
 
 export default new Router({
@@ -164,6 +169,36 @@ export default new Router({
         }
       ]
     },
+
+    // 管理员路由
+    {
+      path:'/admin',
+      name:'admin',
+      component:admin,
+      redirect:'admin/message',
+      children:[
+        {
+          path:'company',
+          name:'company',
+          component: company,
+        },
+        {
+          path:'job/:id?',
+          name:'job',
+          component: job,
+        },
+        {
+          path:'message',
+          name:'message',
+          component: message,
+        },
+        {
+          path:'publicUser/:id?',
+          name:'publicUser',
+          component: publicUser,
+        },
+      ]
+    }
 
 
     
