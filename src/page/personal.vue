@@ -16,7 +16,7 @@
                 <el-col :span="18" class="messageContent">
                   <el-row>
                     <span>name</span>
-                    <el-button type="primary" icon="el-icon-edit" circle class="button"></el-button>
+                    <el-button type="primary" icon="el-icon-edit" circle class="button" @click="show"></el-button>
                   </el-row>
                   <el-row>
                     <span>性别/年龄</span>
@@ -50,13 +50,13 @@
         <foot/>
       </el-footer>
     </el-container>
-    <div class="formMessage">
+    <div class="formMessage" v-if="form.show">
       <el-form ref="form" :model="form" label-width="80px" class="formBox">
         <el-form-item label="名字">
           <el-col :span="9">
             <el-input v-model="form.name"></el-input>
           </el-col>
-          <el-col :span="3" :style= formStyle>性别</el-col>
+          <el-col :span="3" class="formStyle">性别</el-col>
           <!-- <el-col :span="11"><el-input v-model="form.name"></el-input></el-col> -->
           <el-radio-group v-model="form.sex" size="medium">
             <el-radio border label="男"></el-radio>
@@ -67,7 +67,7 @@
           <el-col :span="10">
             <el-input v-model="form.name"></el-input>
           </el-col>
-          <el-col :span="3" :style="formStyle">邮箱</el-col>
+          <el-col :span="3"  class="formStyle">邮箱</el-col>
           <el-col :span="11">
             <el-input v-model="form.name"></el-input>
           </el-col>
@@ -90,7 +90,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" class="elButton">立即创建</el-button>
-          <el-button class="elButton">取消</el-button>
+          <el-button class="elButton" @click="cancel">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -123,21 +123,28 @@ export default {
         resource: "",
         desc: "",
         desc2:"",
-        sex:"男"
+        sex:"男",
+        show:false
       },
-      formStyle: `text-align: right;
-    float: left;
-    font-size: 14px;
-    color: #606266;
-    line-height: 40px;
-    padding: 0 12px 0 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;`
+      
     };
   },
   methods: {
     onSubmit() {
       console.log("submit!");
+    },
+      show(){
+      this.form.show = true;
+      var mo=function(e){e.preventDefault();};
+        document.body.style.overflow='hidden';
+        document.addEventListener("touchmove",mo,false);//禁止页面滑动
+
+    },
+    cancel(){
+      this.form.show = false;
+      var mo=function(e){e.preventDefault();};
+        document.body.style.overflow='';//出现滚动条
+        document.removeEventListener("touchmove",mo,false);
     }
   }
 };
@@ -229,6 +236,16 @@ export default {
     /* border: 1px solid black; */
     z-index: 1000;
     background-color: #fff;
+    .formStyle{
+      text-align: right;
+    float: left;
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    }
     .formBox {
       padding: 50px;
 

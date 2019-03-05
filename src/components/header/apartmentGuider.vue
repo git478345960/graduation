@@ -11,7 +11,7 @@
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'eidtorMessage'}">公司信息编辑</router-link>
+          <router-link :to="{name:'editorMessage'}">公司信息编辑</router-link>
         </li>
       </ul>
     </div>

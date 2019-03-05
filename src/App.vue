@@ -28,6 +28,6 @@ export default {
   margin-bottom:20px;
 }
 .formMessage .el-textarea__inner{
-  height:100px;
+  height:300px;
 }
 </style>
