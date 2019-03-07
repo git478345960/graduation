@@ -6,30 +6,28 @@
     <el-row class="newsTime">
       <p>{{data.time}}</p>
     </el-row>
-    <el-row class="newsContent">
-        <p style="padding-left:15px;padding-bottom:10px;font-size:18px;" v-for="(item,index) of dataArray" :key="index">{{item}}</p>
+    <el-row class="content">
+      <p v-for="(item,index) in dataArray" :key= index >{{item}}</p>
     </el-row>
     
   </div>
-    
-
-  
 </template>
 
-<script scoped>
+<script>
 import api from "@/api/index.js";
 export default {
-  data(){
+  data() {
     return {
+      data: {},
+      currentPage: 1, //初始页
+      pagesize: 5, //    每页的数据
       dataArray:[],
-      data:{},
-      id:this.$route.params.id
-    }
+    };
   },
   created:function(){
-     api.getMessage({id:this.id}).then(res =>{
+    console.log(this.id);
+     api.getMessage({id:this.$route.query.id}).then(res =>{
       if(res.status === 200){
-        
         this.data = res.data;
         console.log(this.data);
         this.dataArray = this.data.content.split('。');
@@ -37,12 +35,18 @@ export default {
       }
     })
   }
+ 
 };
 </script>
-
 <style lang = "scss" scoped>
-  .newsList{
+.newsList{
+  padding:30px;
+  width:1100px;
+  /* border:1px solid black; */
+  min-height:500px;
+      margin:0 auto;
     .newsTitle{
+      
       text-align:center;
       font-size:22px;
       line-height:22px;
@@ -50,13 +54,13 @@ export default {
     .newsTime p{
       float:right;
     }
-    .newsContent{
+    .content{
       padding:10px;
       p{
+        padding:10px;
         font-size:16px;
         
       }
     }
   }
-
 </style>

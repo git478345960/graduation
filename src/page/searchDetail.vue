@@ -73,7 +73,7 @@ export default {
       },
   },
   created:function(){
-    api.getPartTimeInfos({id:this.id})
+    api.getPartTimeInfo({id:this.id})
             .then(res => {
                 if(res.status === 200){
                     console.log(res);

@@ -3,19 +3,19 @@
     <div class="guider">
       <ul class="guiderList">
         <li>
-          <router-link :to="{name:'home'}">主页</router-link>
+          <router-link :to="{name:'homepage',params:{userKey:userKey}}">主页</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'experience'}">面试心得</router-link>
+          <router-link :to="{name:'experience',params:{userKey:userKey}}">面试心得</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'attention'}">注意事项</router-link>
+          <router-link :to="{name:'attention',params:{userKey:userKey}}">注意事项</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'notification'}">消息通告</router-link>
+          <router-link :to="{name:'notification',params:{userKey:userKey}}">消息通告</router-link>
         </li>
       </ul>
     </div>
@@ -36,6 +36,11 @@ import searchBar from "@/components/header/searchBar";
 export default {
   components:{
     searchBar,
+  },
+  data(){
+    return {
+      userKey:this.$route.params.userKey,
+    }
   }
 };
 </script>

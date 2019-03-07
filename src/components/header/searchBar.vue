@@ -70,7 +70,7 @@ export default{
             },200)
         },
         getData(){
-            api.getPartTimeInfos({hiring:this.searchWord})
+            api.getPartTimeInfo({hiring:this.searchWord})
             .then(res => {
                 if(res.status === 200){
                     [...this.backPartContents] = res.data;

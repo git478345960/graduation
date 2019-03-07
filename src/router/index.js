@@ -28,6 +28,7 @@ import company from '@/components/admin/company'
 import job from '@/components/admin/job'
 import message from '@/components/admin/message'
 import publicUser from '@/components/admin/publicUser'
+import messageDetail from '@/components/admin/messageDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -41,17 +42,17 @@ export default new Router({
       redirect:'homepage',
       children:[
         {
-          path:'/homepage',
+          path:'/homepage/:userKey?',
           name:'homepage',
           component: homePage,
         },
         {
-          path:'/attention',
+          path:'/attention/:userKey?',
           name:'attention',
           component: attention,
         },
         {
-          path:'/notification',
+          path:'/notification/:userKey?',
           name:'notification',
           component: notification, 
           children:[
@@ -63,7 +64,7 @@ export default new Router({
           ]       
         },
         {
-          path:'/experience',
+          path:'/experience/:userKey?',
           name:'experience',
           component: experience,        
         },
@@ -122,7 +123,7 @@ export default new Router({
       component: searchDetail,
     },
     {
-      path:'/personal',
+      path:'/personal/:userKey?',
       name:'personal',
       component:personal
     },
@@ -197,6 +198,11 @@ export default new Router({
           name:'publicUser',
           component: publicUser,
         },
+        {
+          path:'messageDetail/:id?',
+          name:'messageDetail',
+          component:messageDetail,
+         },
       ]
     }
 

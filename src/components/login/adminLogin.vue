@@ -1,24 +1,42 @@
 <template>
   <div class="content">
-    <keep-alive>
         <el-input v-model="username" placeholder="请输入管理员账号" class="account"></el-input>
-    </keep-alive>
-    <keep-alive>
-     <el-input v-model="passWorld" placeholder="请输入密码" class="passWorld" type ="password"></el-input>
-    </keep-alive>
-   
+     <el-input v-model="password" placeholder="请输入密码" class="passWorld" type ="password"></el-input>
     <el-row class="btn">
-      <el-button type="primary">登录</el-button>
+      <el-button type="primary" @click="submit">登录</el-button>
     </el-row>
   </div>
 </template>
 
 <script>
+import api from '@/api/index.js'
 export default {
   data(){
     return {
       username: '',
-      passWorld: '',
+      password: '',
+      userKey:'',
+    }
+  },
+  methods:{
+    submit(){
+      api.login({
+                userName: this.username,
+                password: this.password
+            }).then(res => {
+              // console.log(res);
+                if (res.data.status == 'success' && res.data.admin) {
+                    this.userKey = res.data.userKey;
+                    this.$router.push({name:'message'});//跳转哪一个路由
+                    
+                }
+                else if(res.data.status == 'fail'){
+                  this.loginFlag = true;
+                }
+                else{
+                  this.forbidden = true;
+                }
+            })
     }
   }
 };

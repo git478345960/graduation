@@ -1,27 +1,20 @@
 <template>
     <div class = "topNav">
      <el-row class ="topCon">
-       <!-- <el-col :span = "12" class = "left">
-         <ul>
-           <li>肇庆学院</li>
-           <li>|</li>
-           <li>切换学校</li>
-         </ul>
-       </el-col> -->
        <el-col :span = "12" class = "right">
          <ul>
            <li>
-             <router-link :to="{path: '/'}">我的简历</router-link>
+             <router-link :to="{name: 'personal',params:{userKey:this.$route.params.userKey}}">我的简历{{this.$route.params.userKey}}</router-link>
            </li>
            <li>|</li>
            <li>
-             <router-link :to="{path: '/'}">投递箱</router-link>
+             <router-link :to="{name: '/'}">投递箱</router-link>
            </li>
            <li>|</li>
            <li v-if="isLogin == false">
-             <router-link :to="{path: '/'}">登录</router-link>
+             <router-link :to="{name: 'login'}">登录</router-link>
            </li>
-           <li v-else><router-link :to="{path: '/'}">注销</router-link></li>
+           <li v-else><router-link :to="{name: 'login'}">注销</router-link></li>
          </ul>
        </el-col>
      </el-row>
@@ -35,7 +28,12 @@ export default{
   data(){
     return {
       isLogin: false,
+      userKey:this.$route.params.userKey
+
     }
+  },
+  created:function(){
+    this.isLogin = this.$route.params.userKey ? true: false;
   }
 
 }
