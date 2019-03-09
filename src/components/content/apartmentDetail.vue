@@ -1,8 +1,11 @@
 <template>
   <div class="apartmentWrap">
     <div class="apartmentContent">
-      <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
-        <el-table-column label="姓名" width="250">
+      <el-table
+        :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        style="width: 100%"
+      >
+        <el-table-column label="名字" width="250">
           <template slot-scope="scope">
             <!-- <i class="el-icon-time"></i> -->
             <span class="contentBox">{{ scope.row.name }}</span>
@@ -14,16 +17,17 @@
             <span class="contentBox">{{ scope.row.phone }}k</span>
           </template>
         </el-table-column>
-        <el-table-column label="所属公司" width="380">
+        <el-table-column label="生日" width="380">
           <template slot-scope="scope">
             <!-- <i class="el-icon-time"></i> -->
-            <span class="contentBox">{{ scope.row.companyName }}</span>
+            <span class="contentBox">{{ scope.row.birthday }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" type="danger" v-if="scope.row.loginFlag > 0" @click="forbidden(scope.$index, scope.row)">禁止登录</el-button>
-            <el-button size="mini" type="success" v-else @click="forbidden(scope.$index, scope.row)">允许登录</el-button>
+            <el-button size="mini" @click="handleRead(scope.$index, scope.row)">查看</el-button>
+            <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -40,7 +44,6 @@
       </el-row>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -51,19 +54,19 @@ export default {
       tableData: [],
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
-      newData:{
-        title:'',
-        content:''
+      newData: {
+        title: "",
+        content: ""
       },
-      nowData:{},
+      nowData: {},
       showFlag: false,
-      editorFlag:false,
-      
+      editorFlag: false,
+      saveKey: ""
     };
   },
   methods: {
     handleEdit(index, row) {
-      this.nowData = Object.assign({},row);
+      this.nowData = Object.assign({}, row);
       console.log(index, row);
       this.editorFlag = true;
 
@@ -72,40 +75,72 @@ export default {
       };
       document.body.style.overflow = "hidden";
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
-
     },
-    forbidden(index, row) {
+    handleDelete(index, row) {
       console.log(index, row);
       // console.log(removeMessageInfo(row.id));
-      api.modifyApartLoginUserFlag({id:row.id})
-      .then(res=>{
+      api.removePartTimeInfo({ id: row.id }).then(res => {
         this.getData();
-      })
+      });
     },
-     handleSizeChange: function(size) {
-    this.pagesize = size;
-    // console.log(this.pagesize)  //每页下拉显示数据
+    handleRead(index, row) {
+      console.log(row);
+      let routeData = this.$router.resolve({
+        name: "apartPersonal",
+        query: { id: row.id }       
+      });
+      window.open(routeData.href, '_blank');
+    },
+    handleSizeChange: function(size) {
+      this.pagesize = size;
+      // console.log(this.pagesize)  //每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage;
+      // console.log(this.currentPage)  //点击第几页
+    },
+    show() {
+      this.showFlag = true;
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = "hidden";
+      document.addEventListener("touchmove", mo, false); //禁止页面滑动
+    },
+    cancel() {
+      this.showFlag = false;
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = ""; //出现滚动条
+      document.removeEventListener("touchmove", mo, false);
+    },
+    cancelEditor() {
+      this.editorFlag = false;
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = ""; //出现滚动条
+      document.removeEventListener("touchmove", mo, false);
+    },
+
+    getData() {
+      api
+        .getResumes({
+          saveKey: this.saveKey
+        })
+        .then(res => {
+          if (res.status === 200) {
+            [...this.tableData] = res.data;
+          }
+        });
+    }
   },
-  handleCurrentChange: function(currentPage) {
-    this.currentPage = currentPage;
-    // console.log(this.currentPage)  //点击第几页
-  },
-  getData(){
-    api.getAllApartUser().then(res => {
-      console.log(res);
-      if (res.status === 200) {
-        console.log(res.data);
-        [...this.tableData] = res.data;
-      }
-    });
-  }
-    
-  },
-  
+
   created: function() {
+    this.saveKey = this.$route.params.saveKey;
     this.getData();
-  },
- 
+  }
 };
 </script>
 <style lang = "scss" scoped>
@@ -117,11 +152,10 @@ export default {
     position: relative;
     /* border: 1px solid black; */
     height: 610px;
-    .publicButton{
+    .publicButton {
       position: absolute;
-      right:10px;
-      top:3px;
-
+      right: 10px;
+      top: 3px;
     }
   }
   .contentBox {
@@ -130,7 +164,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .formMessage{
+  .formMessage {
     position: fixed;
     width: 800px;
     min-height: 600px;
@@ -139,7 +173,7 @@ export default {
     left: 50%;
     margin-left: -400px;
     border-radius: 20px;
-    padding:40px;
+    padding: 40px;
     /* border: 1px solid black; */
     z-index: 1050;
     background-color: #fff;
@@ -154,5 +188,10 @@ export default {
     background-color: #000;
     opacity: 0.5;
   }
+  
+}
+.item {
+  margin-top:10px;
+  margin-right: 10px;
 }
 </style>

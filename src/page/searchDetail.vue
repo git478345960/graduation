@@ -10,22 +10,22 @@
           <el-row class="detailTop">
             <el-row class="company">{{dataList.name}}</el-row>
             <el-row class="hiring">{{dataList.hiring}}</el-row>
-            <el-row class="treatment">{{dataList.treatment}}-{{dataList.treatment + 2}}k/{{dataList.location}}</el-row>
+            <el-row class="treatment">{{dataList.treatment}}-{{dataList.treatment + 2}}k</el-row>
             <el-row class="holdOn">
-              <button :plain="true" @click="open">投个简历/已投递</button>
+              <button :plain="true" @click="open"><span v-if="deliver ==false" >投个简历</span><span v-else>已投递</span></button>
             </el-row>
           </el-row>
           <el-row>
             <el-col :span="18" class="colDetail">
-              <el-row>
-                <span class="detailTitle">职位诱惑:</span>
-                <p>{{dataList.advantage}}</p>
+              <el-row style="min-height:200px;">
+                <h4 class="detailTitle">职位诱惑:</h4>
+                <p v-for="(item,index) of dataArray.requirements" :key=index>{{index+1}}.{{item}}。</p>
               </el-row>
-              <el-row>
+              <el-row style="min-height:200px;">
                 <span class="detailTitle">职位描述:</span>
-                <p>{{dataList.responsibility}}</p>
+                <p v-for="(item,index) of dataArray.responsibility" :key=index>{{index+1}}.{{item}}。</p>
               </el-row>
-              <el-row>
+              <el-row style="min-height:200px;">
                 <span class="detailTitle">工作地址:</span>
                 <p>{{dataList.location}}</p>
               </el-row>
@@ -55,7 +55,13 @@ export default {
   data() {
     return {
       dataList: {},
-      id:this.$route.params.id
+      id:this.$route.params.id,
+      userKey: this.$route.params.userKey,
+      dataArray:{
+          requirements:[],
+          responsibility:[],
+      },
+      deliver:false,
     };
   },
   components: {
@@ -66,10 +72,17 @@ export default {
   },
   methods:{
       open() {
-        this.$message({
+        api.summitResume({
+          id:this.id,
+          userKey:this.userKey
+        }).then(res=>{
+          this.deliver = true;
+          this.$message({
           message: '恭喜你，投递成功',
           type: 'success'
         });
+        })
+        
       },
   },
   created:function(){
@@ -77,7 +90,10 @@ export default {
             .then(res => {
                 if(res.status === 200){
                     console.log(res);
+                    console.log(this.$route.params);
                     this.dataList = res.data;
+                    [...this.dataArray.requirements] = this.dataList.requirement.split('。').slice(0,-1);
+                    [...this.dataArray.responsibility] = this.dataList.responsibility.split('。').slice(0,-1);
                 }
                
             })
@@ -156,17 +172,19 @@ export default {
           }
         }
         .detailTitle {
-          font-size: 16px;
+          font-size: 18px;
           font-weight: 700;
           color: #333;
           line-height: 16px;
           margin-bottom: 22px;
           margin-top: 5px;
+          
         }
-        p {
-          margin-top: 13px;
-          color: #333;
-        }
+        p{
+            padding-left:80px;
+            margin-top: 13px;
+           color: #333;
+          }
       }
       .colDetailRight {
         border-left: 1px solid #b5acac;

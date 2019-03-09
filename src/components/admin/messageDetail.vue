@@ -30,7 +30,7 @@ export default {
       if(res.status === 200){
         this.data = res.data;
         console.log(this.data);
-        this.dataArray = this.data.content.split('。');
+        this.dataArray = this.data.content.split('。').slice(0,-1);
         console.log(this.dataArray)
       }
     })

@@ -30,4 +30,7 @@ export default {
 .formMessage .el-textarea__inner{
   height:200px;
 }
+.apartmentWrap .el-table--enable-row-transition .el-table__body td {
+  margin-top:10px;
+}
 </style>

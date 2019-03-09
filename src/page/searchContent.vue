@@ -11,7 +11,7 @@
             class="contentBox"
             v-for="(item,index) in dataList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
             :key="index"
-            :to="{name: 'searchDetail', params: {hiring: item.hiring}}"
+            :to="{name: 'searchDetail', params:{userKey: userKey,id: item.id}}"
             prop="date"
           >
             <el-row>
@@ -58,7 +58,8 @@ export default {
       hiring: "",
       dataList: [],
       currentPage:1, //初始页
-      pagesize:5,    //    每页的数据
+      pagesize:5, 
+      userKey:''   //    每页的数据
     };
   },
   components: {
@@ -69,7 +70,8 @@ export default {
   },
   created: function() {
     this.hiring = this.$route.params.hiring;
-    api.getPartTimeInfos({ hiring: this.hiring }).then(res => {
+    this.userKey=this.$route.params.userKey;
+    api.getPartTimeInfo({ hiring: this.hiring }).then(res => {
       if (res.status === 200) {
         [...this.dataList] = res.data;
       }

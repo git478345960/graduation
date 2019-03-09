@@ -78,8 +78,8 @@ export default{
             })
         },
         toOthers(){
-            // console.log(11)
-            this.$router.push({name:'searchContent',params:{hiring:this.searchWord}});
+            console.log(this.$route.params);
+            this.$router.push({name:'searchContent',params:{userKey:this.$route.params.userKey,hiring:this.searchWord}});
         }
        
     }

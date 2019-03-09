@@ -10,27 +10,24 @@
                   <img src="@/assets/logo2.jpg" alt>
                 </el-col>
                 <el-col :span="18" class="messageContent">
-                  <el-row style="margin-bottom:10px;">
-                    <h1>公司名字：{{data.companyName}}</h1>
-                    <el-button
-                      type="primary"
-                      icon="el-icon-edit"
-                      circle
-                      class="button"
-                      @click="show"
-                    ></el-button>
+                  <el-row>
+                    <span>姓名: {{form.name}}</span>
                   </el-row>
-                  <el-row style="margin-bottom:15px;">
-                    <span>员工名字：{{data.name}}</span>
+                  <el-row>
+                    <span>性别: {{form.sex}} 出生年月:{{form.birthday}}</span>
                   </el-row>
-                  <el-row style="margin-bottom:15px;">
-                    <span>性别：{{data.sex}}/联系方式：{{data.phone}}</span>
+                  <el-row>
+                    <span>手机：{{form.phone}} 邮箱：{{form.email}}</span>
                   </el-row>
                 </el-col>
               </el-row>
               <el-row class="introduce">
-                <h1>公司信息</h1>
-                <p v-for="(item,index) of companyInfoArray" :key="index" style="height:30px;">{{index+1}}.{{item}}。</p>
+                <h1>自我描述</h1>
+                <p>{{form.introduction}}</p>
+              </el-row>
+              <el-row class="picture">
+                <h1>项目经历</h1>
+                <p>{{form.content}}</p>
               </el-row>
             </el-col>
             <el-col :span="5" class="contentRight">
@@ -44,43 +41,11 @@
         <foot/>
       </el-footer>
     </el-container>
-    <div class="formMessage" v-show="showFlag">
-      <el-form ref="form" :model="nowData" label-width="80px" class="formBox">
-        <el-form-item label="公司名字">
-          <el-col :span="10">
-            <el-input v-model="nowData.companyName"></el-input>
-          </el-col>
-          <el-col :span="3" class="formStyle">性别</el-col>
-          <el-radio-group v-model="nowData.sex" size="medium">
-            <el-radio border label="男"></el-radio>
-            <el-radio border label="女"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="手机">
-          <el-col :span="10">
-            <el-input v-model="nowData.phone"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="姓名">
-          <el-col :span="10">
-            <el-input v-model="nowData.name"></el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="公司信息">
-          <el-input type="textarea" v-model="nowData.companyInfo"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit" class="elButton">立即修改</el-button>
-          <el-button class="elButton" @click="cancel">取消修改</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="modal-backdrop" v-show="showFlag"></div>
   </div>
 </template>
 
 <script>
-import api from '@/api/index.js'
+import api from "@/api/index.js";
 import topNav from "@/components/header/topNav";
 import searchBar from "@/components/header/searchBar";
 import guider from "@/components/header/guider";
@@ -96,29 +61,15 @@ export default {
   },
   data() {
     return {
-      nowData:{},
-      data:{},
-      userKey: "",
-      showFlag:false,
-      companyInfoArray :[],
-      userKey:'',
+      form: {},
+      form2: {},
+      showFlag: false,
+      blackShow:false,
+      id:this.$route.query.id,
+      userKey:this.$route.query.userKey
     };
   },
   methods: {
-    onSubmit() {
-      api.modifyApartUser({
-          apartKey: this.userKey,
-          name: this.nowData.name,
-          companyName: this.nowData.companyName,
-          companyInfo: this.nowData.companyInfo,
-          sex: this.nowData.sex,
-          phone: this.nowData.phone,
-      }).then(res =>{
-        this.getData();
-
-      })
-      this.cancel();
-    },
     show() {
       this.showFlag = true;
       var mo = function(e) {
@@ -135,24 +86,34 @@ export default {
       document.body.style.overflow = ""; //出现滚动条
       document.removeEventListener("touchmove", mo, false);
     },
-    getData(){
-      api.
-          getApartUser({
-            apartKey:this.userKey
-          })
-          .then(res=>{
-            this.data = Object.assign({},res.data);
-            this.nowData = Object.assign({},res.data);
-            this.companyInfoArray = this.data.companyInfo.split('。').slice(0,-1);
-            console.log(this.companyInfoArray)
-          })
+    getResume() {
+      console.log(this.userKey)
+      console.log(this.id);
+      api.getResumes({ id: this.id }).then(res => {
+        if (res.status === 200) {
+          console.log(res);
+          this.form = Object.assign({}, res.data);
+          this.form2 = Object.assign({}, this.form);
+          console.log(this.form);
+        }
+      });
+    },
+    formatTen(num) {
+      return num > 9 ? num + "" : "0" + num;
+    },
+    formatDate(date) {
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+      return year + "-" + this.formatTen(month) + "-" + this.formatTen(day);
     }
   },
-  created:function(){
-    this.userKey = this.$route.params.userKey;
-    this.getData();
-    // console.log(this.companyInfoArray);
-  }
+  created: function() {
+    this.getResume();
+  },
 };
 </script>
 
@@ -163,17 +124,16 @@ export default {
 }
 .personalGuider {
   .personalWrap {
-    min-height: 852px;
+    height: 852px;
     .personalContent {
       width: 1300px;
       margin: 0 auto;
-      min-height: 850px;
+      height: 850px;
       border: 1px solid #bfb2b2;
       margin-top: 40px;
       background: #fafafa;
       .contentLeft {
         padding: 45px;
-        min-height: 850px;
         h1 {
           margin-bottom: 5px;
         }
@@ -206,7 +166,7 @@ export default {
         }
         .introduce {
           padding: 30px;
-          min-height: 505px;
+          min-height: 205px;
           border: 1px solid #ccbbbb;
         }
         .home {
@@ -216,7 +176,7 @@ export default {
         }
         .picture {
           padding: 30px;
-          min-height: 205px;
+          min-height: 295px;
           border: 1px solid #ccbbbb;
         }
       }
@@ -241,7 +201,7 @@ export default {
     margin-left: -400px;
     border-radius: 20px;
     /* border: 1px solid black; */
-    z-index: 1041;
+    z-index: 1050;
     background-color: #fff;
     .formStyle {
       text-align: right;
@@ -255,14 +215,13 @@ export default {
     }
     .formBox {
       padding: 50px;
-
       .elButton {
         width: 68px;
         height: 40px;
       }
     }
   }
-  .modal-backdrop {
+   .modal-backdrop {
     position: fixed;
     top: 0;
     right: 0;

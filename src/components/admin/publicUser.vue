@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     handleEdit(index, row) {
-      this.nowData = row;
+      this.nowData = Object.assign({},row);
       console.log(index, row);
       this.editorFlag = true;
 
@@ -78,7 +78,6 @@ export default {
       // console.log(removeMessageInfo(row.id));
       api.modifyLoginUserFlag({id:row.id})
       .then(res=>{
-
         this.getData();
       })
     },

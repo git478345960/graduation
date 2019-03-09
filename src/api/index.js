@@ -9,7 +9,10 @@ const api = {
   register(params){
     return axios.get('/register',{params})
   },
-
+// 投递简历进行处理
+summitResume(params){
+  return axios.get('/summitResume',{params})
+},
   // 返回所有的兼职信息
   getPartTimeInfos(){
     return axios.get('/getPartTimeInfo');
@@ -18,16 +21,40 @@ const api = {
   getPartTimeInfo(params){
     return axios.get('/getPartTimeInfo',{params})
   },
+  getPartTime(params){
+    return axios.get('/getPartTime',{params})
+  },
   removePartTimeInfo(params){
     return axios.get('/removePartTimeInfo',{params})
   },
-
+  modifyPartTimeInfo(params){
+    return axios.get('/modifyPartTimeInfo',{params})
+  },
+  addPartTimeInfo(params){
+    return axios.get('/addPartTimeInfo',{params})
+  },
+  apartUserRegister(params){
+    return axios.get('/apartUserRegister',{params})
+  },
+  loginApart(params){
+    return axios.get('/loginApart',{params})
+  },
   //查看所有公司人员
   getAllApartUser(){
     return axios.get('/getAllApartUser');
   },
-  getAllUser(){
-    return axios.get('/getAllUser');
+  getAllUser(params){
+    return axios.get('/getAllUser',{params});
+  },
+  getApartUser(params){
+    return axios.get('/getApartUser',{params});
+  },
+  
+  modifyApartUser(params){
+    return axios.get('/modifyApartUser',{params});
+  },
+  getResumes(params){
+    return axios.get('/getResumes',{params})
   },
   // 禁止或允许招聘单位登录
   modifyApartLoginUserFlag(params){
@@ -40,6 +67,9 @@ const api = {
   // 获取个人简历
   getMyResume(params){
     return axios.get('/getMyResume',{params})
+  },
+  getResumes(params){
+    return axios.get('/getResumes',{params});
   },
   // 修改个人简历
   modifyResume(params){

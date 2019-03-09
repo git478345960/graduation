@@ -4,13 +4,9 @@
        <el-col :span = "12" class = "right">
          <ul>
            <li>
-             <router-link :to="{name: 'personal',params:{userKey:this.$route.params.userKey}}">我的简历{{this.$route.params.userKey}}</router-link>
+             <router-link v-show="userFlag" :to="{name: 'personal',params:{userKey:this.$route.params.userKey}}">我的简历</router-link>
            </li>
-           <li>|</li>
-           <li>
-             <router-link :to="{name: '/'}">投递箱</router-link>
-           </li>
-           <li>|</li>
+           <li v-show="userFlag">|</li>
            <li v-if="isLogin == false">
              <router-link :to="{name: 'login'}">登录</router-link>
            </li>
@@ -28,12 +24,13 @@ export default{
   data(){
     return {
       isLogin: false,
-      userKey:this.$route.params.userKey
-
+      userKey:this.$route.params.userKey,
+      userFlag:'',
     }
   },
   created:function(){
-    this.isLogin = this.$route.params.userKey ? true: false;
+    this.isLogin = this.$route.params ? true: false;
+    this.userFlag = this.$route.params.userKey ?true : false ;
   }
 
 }

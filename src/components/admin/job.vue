@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     handleEdit(index, row) {
-      this.nowData = row;
+      this.nowData = Object.assign({},row);
       console.log(index, row);
       this.editorFlag = true;
 

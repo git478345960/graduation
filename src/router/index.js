@@ -4,6 +4,7 @@ import home from '@/page/home'
 import login from '@/page/login'
 import register from '@/page/register'
 import personal from '@/page/personal'
+import apartPersonal from '@/page/apartPersonal'
 import searchDetail from '@/page/searchDetail'
 import searchContent from '@/page/searchContent'
 import studentRegister from '@/components/register/studentRegister'
@@ -21,6 +22,7 @@ import notificationRight from '@/components/content/notificationRight'
 import oneNotificationRight from '@/components/content/notificationRight'
 import experienceDetail from '@/components/content/experienceDetail'
 import apartment from '@/components/content/apartment'
+import apartmentDetail from '@/components/content/apartmentDetail'
 import apartmentHome from '@/page/apartmentHome'
 import editorMessage from '@/components/content/editorMessage'
 import admin from '@/page/admin'
@@ -113,12 +115,12 @@ export default new Router({
       ]
     },
     {
-      path: '/searchContent/:hiring?',
+      path: '/searchContent/:userKey?/:hiring?',
       name: 'searchContent',
       component: searchContent,
     },
     {
-      path: '/searchDetail/:id?',
+      path: '/searchDetail/:userKey?/:id?',
       name: 'searchDetail',
       component: searchDetail,
     },
@@ -147,24 +149,34 @@ export default new Router({
       // redirect:'notification',
       children:[
         {
-          path:'/oneNotification',
+          path:'/oneNotification/:userKey?',
           name:'oneNotification',
           component: oneNotification,
           children:[
             {
-              path:'oneNotificationRight/:id?',
+              path:'/oneNotificationRight/:userKey?/:id?',
               name:'oneNotificationRight',
               component: oneNotificationRight,
             }
           ]
         },
         {
-          path:'apartment',
+          path:'apartment/:userKey?',
           name:'apartment',
           component: apartment,        
         },
         {
-          path:'editorMessage',
+          path:'apartmentDetail/:saveKey?',
+          name:'apartmentDetail',
+          component: apartmentDetail,        
+        },
+        {
+          path:'apartPersonal/:id?',
+          name:'apartPersonal',
+          component: apartPersonal,        
+        },
+        {
+          path:'editorMessage/:userKey?',
           name:'editorMessage',
           component: editorMessage, 
         }

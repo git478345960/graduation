@@ -1,7 +1,7 @@
 <template>
   <div class="content" @keydown="lost">
     <el-input v-model="username" placeholder="请输入学生账号" class="account"></el-input>
-    <el-input v-model="password" placeholder="请输入密码" class="passWorld" type ="password"></el-input>
+    <el-input v-model="password" placeholder="请输入密码" class="passWord" type ="password"></el-input>
     <el-row class="btn">
       <el-button type="primary" @click="submit">登录</el-button>
     </el-row>

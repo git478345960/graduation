@@ -2,7 +2,7 @@
   <el-container class="notificationWrap">
     <el-aside width="450px">
       <el-row class="noticeContent">
-         <router-link v-for="(item,index) in newList" :key="index" :to = "{name: 'oneNotificationRight',params:{id:item.id}}" class="linkTo" @click.native="flush">
+         <router-link v-for="(item,index) in newList" :key="index" :to = "{name: 'oneNotificationRight',params:{userKey:userKey,id:item.id}}" class="linkTo" @click.native="flush">
            <el-col :span="17"><h1>{{item.title}}</h1></el-col>
            <el-col :span="7"><p>{{item.time}}</p></el-col>
          </router-link>
@@ -19,7 +19,8 @@ import api from "@/api/index.js";
 export default {
   data(){
     return {
-      newList:[]
+      newList:[],
+      userKey:this.$route.params.userKey
     }
   },
   created:function(){

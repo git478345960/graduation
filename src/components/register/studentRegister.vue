@@ -4,17 +4,17 @@
       <el-input v-model="username" placeholder="请输入需要设置的学生账号" class="rAccount"></el-input>
     </keep-alive>
     <keep-alive>
-      <el-input v-model="password" placeholder="请输入密码" class="rPassWorld" type="password"></el-input>
+      <el-input v-model="password" placeholder="请输入密码" class="rPassWord" type="password"></el-input>
     </keep-alive>
     <keep-alive>
-      <el-input v-model="sePassWorld" placeholder="请再次输入密码" class="sePassWorld" type="password"></el-input>
+      <el-input v-model="sePassWord" placeholder="请再次输入密码" class="sePassWord" type="password"></el-input>
     </keep-alive>
 
     <el-row class="btn">
       <el-button type="primary" @click="submit">立即注册</el-button>
     </el-row>
     <el-row v-if="registerFlag" class="error">该用户已存在</el-row>
-    <el-row v-if="password !== sePassWorld" class="error">两次密码不一样</el-row>
+    <el-row v-if="password !== sePassWord" class="error">两次密码不一样</el-row>
   </div>
 </template>
 
@@ -25,13 +25,13 @@ export default {
     return {
       username: "",
       password: "",
-      sePassWorld: "",
+      sePassWord: "",
       registerFlag: false
     };
   },
   methods: {
     submit() {
-      if (this.password === this.sePassWorld) {
+      if (this.password === this.sePassWord) {
         api
           .register({
             userName: this.username,

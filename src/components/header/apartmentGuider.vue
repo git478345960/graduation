@@ -3,15 +3,15 @@
     <div class="guider">
       <ul class="guiderList">
         <li>
-          <router-link :to="{name:'oneNotification'}">主页</router-link>
+          <router-link :to="{name:'oneNotification',params:{userKey:this.$route.params.userKey}}">主页</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'apartment'}">兼职信息</router-link>
+          <router-link :to="{name:'apartment',params:{userKey:this.$route.params.userKey}}">兼职信息</router-link>
         </li>
         <li>|</li>
         <li>
-          <router-link :to="{name:'editorMessage'}">公司信息编辑</router-link>
+          <router-link :to="{name:'editorMessage',params:{userKey:this.$route.params.userKey}}">公司信息编辑</router-link>
         </li>
       </ul>
     </div>
@@ -29,6 +29,9 @@ import searchBar from "@/components/header/searchBar";
 export default {
   components:{
     searchBar,
+  },
+  created:function(){
+    console.log(this.$route.params);
   }
 };
 </script>
