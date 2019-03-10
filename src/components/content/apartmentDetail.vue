@@ -138,6 +138,7 @@ export default {
   },
 
   created: function() {
+    console.log(this.$route.params.userKey);
     this.saveKey = this.$route.params.saveKey;
     this.getData();
   }

@@ -143,7 +143,7 @@ export default {
           .then(res=>{
             this.data = Object.assign({},res.data);
             this.nowData = Object.assign({},res.data);
-            this.companyInfoArray = this.data.companyInfo.split('。').slice(0,-1);
+            this.companyInfoArray = this.data.companyInfo ? this.data.companyInfo.split('。').slice(0,-1) : this.data.companyInfo;
             console.log(this.companyInfoArray)
           })
     }

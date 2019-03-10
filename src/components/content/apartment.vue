@@ -51,24 +51,24 @@
       <el-form ref="form" :model="newData" label-width="80px" class="formBox">
         <el-form-item label="招聘岗位">
           <el-col :span="15">
-            <el-input v-model="nowData.hiring"></el-input>
+            <el-input v-model="newData.hiring"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="待遇">
+        <el-form-item label="待遇(k)">
           <el-col :span="15">
-            <el-input v-model="nowData.treatment"></el-input>
+            <el-input v-model="newData.treatment"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="工作地点">
           <el-col :span="15">
-            <el-input v-model="nowData.location"></el-input>
+            <el-input v-model="newData.location"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="任职要求">
-          <el-input type="textarea" v-model="nowData.requirement"></el-input>
+          <el-input type="textarea" v-model="newData.requirement"></el-input>
         </el-form-item>
         <el-form-item label="职位责任">
-          <el-input type="textarea" v-model="nowData.responsibility"></el-input>
+          <el-input type="textarea" v-model="newData.responsibility"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" class="elButton">确认发布</el-button>
@@ -150,7 +150,7 @@ export default {
       console.log(row);
       this.$router.push({
         name: "apartmentDetail",
-        params: { saveKey: row.saveKey }
+        params: { userKey:this.$route.params.userKey,saveKey: row.saveKey }
       });
     },
     handleSizeChange: function(size) {
@@ -201,25 +201,25 @@ export default {
             console.log(res);
             // [...this.tableData] = res.data;
             this.getData();
+            this.newData ={};
           }
         });
-      console.log();
       this.editorFlag = false;
     },
     onSubmit() {
       api
         .addPartTimeInfo({
           apartKey: this.userKey,
-          id: this.nowData.id,
-          hiring: this.nowData.hiring,
-          treatment: this.nowData.treatment,
-          location: this.nowData.location,
-          requirements: this.nowData.requirements,
-          responsibility: this.nowData.responsibility
+          id: this.newData.id,
+          hiring: this.newData.hiring,
+          treatment: this.newData.treatment,
+          location: this.newData.location,
+          requirement: this.newData.requirement,
+          responsibility: this.newData.responsibility
         })
         .then(res => {
           this.getData();
-          this.nowData = {};
+          this.newData = {};
         });
       this.cancel();
     },

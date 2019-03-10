@@ -65,7 +65,7 @@ export default {
     api.getDetailExperience({ id: this.$route.params.id }).then(res => {
       //  console.log(res.data);
       this.dataList = res.data;
-      this.dataListArray = this.dataList.content.split('。').slice(0,-1);
+      this.dataListArray = this.dataList.content ? this.dataList.content.split('。').slice(0,-1) : this.dataList.content;
       // console.log(this.dataListArray);
     });
     api.getExperience().then(res => {

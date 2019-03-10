@@ -1,15 +1,8 @@
 <template>
   <div class="content" @keydown="lost">
-    <keep-alive>
       <el-input v-model="username" placeholder="请输入需要设置的学生账号" class="rAccount"></el-input>
-    </keep-alive>
-    <keep-alive>
       <el-input v-model="password" placeholder="请输入密码" class="rPassWord" type="password"></el-input>
-    </keep-alive>
-    <keep-alive>
       <el-input v-model="sePassWord" placeholder="请再次输入密码" class="sePassWord" type="password"></el-input>
-    </keep-alive>
-
     <el-row class="btn">
       <el-button type="primary" @click="submit">立即注册</el-button>
     </el-row>
@@ -38,7 +31,6 @@ export default {
             password: this.password
           })
           .then(res => {
-            console.log(res);
             if (res.data.status == "success") {
               // this.$store.dispatch('setUser', this.username);
               // this.$router.push({name:'home'});//跳转哪一个路由

@@ -7,7 +7,7 @@
       <p>{{data.time}}</p>
     </el-row>
     <el-row class="content">
-      <p v-for="(item,index) in dataArray" :key= index >{{item}}</p>
+      <p v-for="(item,index) in dataArray" :key= index >{{item}}。</p>
     </el-row>
     
   </div>
@@ -30,8 +30,7 @@ export default {
       if(res.status === 200){
         this.data = res.data;
         console.log(this.data);
-        this.dataArray = this.data.content.split('。').slice(0,-1);
-        console.log(this.dataArray)
+        this.dataArray = this.data.content ? this.data.content.split('。').slice(0,-1) : this.data.content 
       }
     })
   }

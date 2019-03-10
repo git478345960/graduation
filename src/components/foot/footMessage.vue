@@ -11,9 +11,15 @@
       <el-col :span="8">
         <dl>
           <dt>用户帮助</dt>
-          <dd><a href="https://www.lagou.com/privacy.html">用户服务隐私</a></dd>
-          <dd><a href="https://www.lagou.com/qa.html?t=1">帮助中心</a></dd>
-          <dd><a href="#">隐私政策</a></dd>
+          <dd>
+            <a href="https://www.lagou.com/privacy.html">用户服务隐私</a>
+          </dd>
+          <dd>
+            <a href="https://www.lagou.com/qa.html?t=1">帮助中心</a>
+          </dd>
+          <dd>
+            <a href="#">隐私政策</a>
+          </dd>
         </dl>
       </el-col>
       <el-col :span="8">
@@ -41,7 +47,7 @@ export default {};
     height: 100%;
     // border: 1px solid black;
     dl {
-    //   border: 1px solid black;
+      //   border: 1px solid black;
       dt {
         font-size: 18px;
         font-weight: 600;
@@ -49,8 +55,14 @@ export default {};
         margin-bottom: 20px;
       }
       dd {
-          margin-bottom:10px;
-          
+        margin-bottom: 10px;
+        a {
+          color: #333;
+          &:hover{
+            color: #00b38a;
+                        text-decoration: underline;
+          }
+        }
       }
     }
   }

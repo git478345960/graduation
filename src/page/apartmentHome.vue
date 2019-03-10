@@ -2,7 +2,7 @@
 <div class = "wrapGuider">
   <el-container>
   <el-header height="35px" width="1190px">
-    <topNav />
+    <apartTopNav />
   </el-header>
   <el-main width="542px">
     <apartmentGuider />
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import topNav from '@/components/header/topNav';
+import apartTopNav from '@/components/header/apartTopNav';
 import searchBar from '@/components/header/searchBar';
 import apartmentGuider from '@/components/header/apartmentGuider';
 import showContent from '@/components/content/showContent';
@@ -26,7 +26,7 @@ import foot from '@/components/foot/foot';
 
 export default{
   components:{
-    topNav,
+    apartTopNav,
     searchBar,
     apartmentGuider,
     showContent,

@@ -172,6 +172,7 @@ export default {
         content:this.newData.content
       }).then(res=>{
         [...this.tableData] = res.data;
+        this.newData = {};
       })
       this.cancel();
     },

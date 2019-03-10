@@ -72,6 +72,8 @@ export default {
   },
   methods:{
       open() {
+        console.log(this.id);
+        console.log(this.userKey);
         api.summitResume({
           id:this.id,
           userKey:this.userKey
@@ -92,8 +94,8 @@ export default {
                     console.log(res);
                     console.log(this.$route.params);
                     this.dataList = res.data;
-                    [...this.dataArray.requirements] = this.dataList.requirement.split('。').slice(0,-1);
-                    [...this.dataArray.responsibility] = this.dataList.responsibility.split('。').slice(0,-1);
+                    [...this.dataArray.requirements] = this.dataList.requirement ?this.dataList.requirement.split('。').slice(0,-1) : this.dataList.requirement;
+                    [...this.dataArray.responsibility] = this.dataList.responsibility ? this.dataList.responsibility.split('。').slice(0,-1) :this.dataList.responsibility;
                 }
                
             })

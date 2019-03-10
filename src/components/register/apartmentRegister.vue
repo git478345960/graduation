@@ -8,6 +8,7 @@
       <el-button type="primary" @click="submit">立即注册</el-button>
     </el-row>
     <el-row v-if="registerFlag" class="error">该用户已存在</el-row>
+    <el-row v-if="passWord !== sePassWord" class="error">两次密码不一样</el-row>
   </div>
 </template>
 

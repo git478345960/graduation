@@ -3,7 +3,7 @@
     <el-carousel :interval="5000" arrow="hover" height="500px">
       <el-carousel-item v-for="(item,index) in imgUrl" :key="item + '_' + index">
         <el-row class = "imgWrap">
-            <img :src="item.idView">
+            <a :href="item.href" target="_blank"><img :src="item.idView" ></a>
         </el-row>
       </el-carousel-item>
     </el-carousel>
@@ -15,9 +15,14 @@ export default {
     data(){
         return {
             imgUrl:[
-                {idView : require('@/assets/logo.jpg')},
-                {idView : require('@/assets/logo2.jpg')},
-                {idView : require('@/assets/logo3.png')}
+                {idView : require('@/assets/demo1.jpg'),
+                href:'https://activity.lagou.com/gracie/pc/promotion2019-city.html'
+                },
+                {idView : require('@/assets/demo2.png'),
+                href:'https://kaiwu.lagou.com/course/courseInfo.htm?courseId=1&sid=3-PC_banner-0'
+                },
+                {idView : require('@/assets/demo3.jpg'),
+                href:"https://activity.lagou.com/gracie/h5/promotion2019-main.html"}
             ],
            
         }
@@ -27,6 +32,11 @@ export default {
 
 
 <style scoped>
+.imgWrap a{
+  display: block;
+  width: 100%;
+  height:100%;
+}
 .el-carousel__item{
   height:500px;
 }

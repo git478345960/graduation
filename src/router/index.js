@@ -170,17 +170,18 @@ export default new Router({
           name:'apartmentDetail',
           component: apartmentDetail,        
         },
-        {
-          path:'apartPersonal/:id?',
-          name:'apartPersonal',
-          component: apartPersonal,        
-        },
+       
         {
           path:'editorMessage/:userKey?',
           name:'editorMessage',
           component: editorMessage, 
         }
       ]
+    },
+    {
+      path:'/apartPersonal/:id?',
+      name:'apartPersonal',
+      component: apartPersonal,        
     },
 
     // 管理员路由
