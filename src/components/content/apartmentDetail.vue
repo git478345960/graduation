@@ -14,7 +14,7 @@
         <el-table-column label="联系方式" width="250">
           <template slot-scope="scope">
             <!-- <i class="el-icon-time"></i> -->
-            <span class="contentBox">{{ scope.row.phone }}k</span>
+            <span class="contentBox">{{ scope.row.phone }}</span>
           </template>
         </el-table-column>
         <el-table-column label="生日" width="380">

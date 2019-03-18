@@ -27,6 +27,7 @@ export default {
     }
   },
   created:function(){
+    console.log(this.$route.params);
      api.getMessage({id:this.id}).then(res =>{
       if(res.status === 200){
         
