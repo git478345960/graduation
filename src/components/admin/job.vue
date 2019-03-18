@@ -21,8 +21,9 @@
           </template>
         </el-table-column>
         <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <template slot-scope="scope" >
+            <el-button v-if="keyFlag" size="mini" type="success" @click="handleRead(scope.$index, scope.row)">查看详情</el-button>
+            <el-button v-else size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,6 +58,7 @@ export default {
       nowData:{},
       showFlag: false,
       editorFlag:false,
+      keyFlag:false,
     };
   },
   methods: {
@@ -72,8 +74,11 @@ export default {
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
 
     },
+    handleRead(index, row){
+      console.log(index,row);
+      this.$router.push({name:'searchDetail',params:{userKey:this.$route.params.userKey,id:row.id}});
+    },
     handleDelete(index, row) {
-      console.log(index, row);
       // console.log(removeMessageInfo(row.id));
       api.removePartTimeInfo({id:row.id})
       .then(res=>{
@@ -92,6 +97,8 @@ export default {
   },
   
   created: function() {
+    this.keyFlag = this.$route.params.userKey ? true : false;
+    console.log(this.keyFlag);
     api.getPartTimeInfos().then(res => {
       console.log(res);
       if (res.status === 200) {

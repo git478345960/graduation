@@ -65,7 +65,7 @@ export default {
         min-width: 1024px;
     height: 125px;
     padding-top: 35px;
-    background: #100f06 url(//www.lgstatic.com/www/static/community/modules/index/banner/img/banner-bg_21a3371.jpg) center center no-repeat;
+    background: #100f06 url('../../assets/bc1.jpg') center center no-repeat;
 
     h2 {
       margin:0 auto;

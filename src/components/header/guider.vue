@@ -3,7 +3,7 @@
     <div class="guider">
       <ul class="guiderList">
         <li>
-          <router-link :to="{name:'homepage',params:{userKey:userKey}}">主页</router-link>
+          <router-link :to="{name:'findJob',params:{userKey:userKey}}">主页</router-link>
         </li>
         <li>|</li>
         <li>
@@ -17,6 +17,11 @@
         <li>
           <router-link :to="{name:'notification',params:{userKey:userKey}}">消息通告</router-link>
         </li>
+        <li>|</li>
+        <li>
+          <router-link :to="{name:'homepage',params:{userKey:userKey}}">招聘轮播</router-link>
+        </li>
+        
       </ul>
     </div>
     <div class="serchBarWrap">
@@ -41,7 +46,8 @@ export default {
     return {
       userKey:this.$route.params.userKey,
     }
-  }
+  },
+
 };
 </script>
 

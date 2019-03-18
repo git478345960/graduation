@@ -41,7 +41,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component:home,
-      redirect:'homepage',
+      redirect:'findJob',
       children:[
         {
           path:'/homepage/:userKey?',
@@ -70,6 +70,11 @@ export default new Router({
           name:'experience',
           component: experience,        
         },
+        {
+          path:'/findJob/:userKey?',
+          name:'findJob',
+          component:job
+        }
       ]
     },
     {

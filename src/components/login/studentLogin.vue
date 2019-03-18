@@ -31,7 +31,7 @@ export default {
                 if (res.data.status == 'success') {
                     // this.$store.dispatch('setUser', this.username);
                     this.userKey = res.data.userKey;
-                    this.$router.push({name:'homepage',params:{userKey:this.userKey}});//跳转哪一个路由
+                    this.$router.push({name:'findJob',params:{userKey:this.userKey}});//跳转哪一个路由
                     
                 }
                 else if(res.data.status == 'fail'){
