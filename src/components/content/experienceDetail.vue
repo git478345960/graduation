@@ -23,7 +23,7 @@
                 v-for="(item,index) in dataArray"
                 :key="index"
                 class="titleList"
-                :to="{name:'experienceDetail',params:{id:item.id}}"
+                :to="{name:'experienceDetail',params:{id:item.id,userKey:userKey}}"
                 @click.native = "reLoad"
                 
               >{{item.title}}</router-link>
@@ -52,6 +52,7 @@ export default {
       dataArray: [],
       dataListArray: [],
       dataId:this.$route.params.id,
+      userKey:this.$route.params.userKey,
     };
   },
   components: {
@@ -61,7 +62,7 @@ export default {
     guider
   },
   created: function() {
-    console.log(this.dataId);
+    console.log(this.userKey);
     api.getDetailExperience({ id: this.$route.params.id }).then(res => {
       //  console.log(res.data);
       this.dataList = res.data;

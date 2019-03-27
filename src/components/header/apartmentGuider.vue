@@ -31,7 +31,6 @@ export default {
     searchBar,
   },
   created:function(){
-    console.log(this.$route.params);
   }
 };
 </script>

@@ -63,9 +63,7 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.nowData = Object.assign({},row);
-      console.log(index, row);
       this.editorFlag = true;
-
       var mo = function(e) {
         e.preventDefault();
       };
@@ -74,8 +72,6 @@ export default {
 
     },
     forbidden(index, row) {
-      console.log(index, row);
-      // console.log(removeMessageInfo(row.id));
       api.modifyLoginUserFlag({id:row.id})
       .then(res=>{
         this.getData();
@@ -91,9 +87,7 @@ export default {
   },
   getData(){
     api.getAllUser().then(res => {
-      console.log(res);
       if (res.status === 200) {
-        console.log(res.data);
         [...this.tableData] = res.data;
       }
     });

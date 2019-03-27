@@ -25,11 +25,9 @@ export default {
     };
   },
   created:function(){
-    console.log(this.id);
      api.getMessage({id:this.$route.query.id}).then(res =>{
       if(res.status === 200){
         this.data = res.data;
-        console.log(this.data);
         this.dataArray = this.data.content ? this.data.content.split('。').slice(0,-1) : this.data.content 
       }
     })

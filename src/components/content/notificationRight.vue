@@ -27,14 +27,11 @@ export default {
     }
   },
   created:function(){
-    console.log(this.$route.params);
      api.getMessage({id:this.id}).then(res =>{
       if(res.status === 200){
         
         this.data = res.data;
-        console.log(this.data);
         this.dataArray = this.data.content ? this.data.content.split('。').slice(0,-1) :this.data.content;
-        console.log(this.dataArray)
       }
     })
   }

@@ -138,8 +138,6 @@ export default {
           content: this.form2.content
         })
         .then(res => {
-          console.log(this.form2.birthday);
-          console.log(res);
           if (res.data.status === "success") {
             this.getResume();
           }
@@ -168,7 +166,6 @@ export default {
         if (res.status === 200) {
           this.form = res.data;
           this.form2 = Object.assign({}, this.form);
-          console.log(this.form);
         }
       });
     },

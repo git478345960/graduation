@@ -64,11 +64,11 @@
             <el-input v-model="newData.location"></el-input>
           </el-col>
         </el-form-item>
+        <el-form-item label="岗位职责">
+          <el-input type="textarea" v-model="newData.responsibility"></el-input>
+        </el-form-item>
         <el-form-item label="任职要求">
           <el-input type="textarea" v-model="newData.requirement"></el-input>
-        </el-form-item>
-        <el-form-item label="职位责任">
-          <el-input type="textarea" v-model="newData.responsibility"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" class="elButton">确认发布</el-button>
@@ -93,13 +93,12 @@
             <el-input v-model="nowData.location"></el-input>
           </el-col>
         </el-form-item>
+         <el-form-item label="岗位职责">
+          <el-input type="textarea" v-model="nowData.responsibility"></el-input>
+        </el-form-item>
         <el-form-item label="任职要求">
           <el-input type="textarea" v-model="nowData.requirement"></el-input>
         </el-form-item>
-        <el-form-item label="职位责任">
-          <el-input type="textarea" v-model="nowData.responsibility"></el-input>
-        </el-form-item>
-        <el-form-item>
           <el-button type="primary" @click="editor" class="elButton">确认修改</el-button>
           <el-button class="elButton" @click="cancelEditor">取消修改</el-button>
         </el-form-item>
@@ -130,7 +129,6 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.nowData = Object.assign({}, row);
-      console.log(index, row);
       this.editorFlag = true;
 
       var mo = function(e) {
@@ -140,14 +138,12 @@ export default {
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
     },
     handleDelete(index, row) {
-      console.log(index, row);
       // console.log(removeMessageInfo(row.id));
       api.removePartTimeInfo({ id: row.id }).then(res => {
         this.getData();
       });
     },
     handleRead(index, row) {
-      console.log(row);
       this.$router.push({
         name: "apartmentDetail",
         params: { userKey:this.$route.params.userKey,saveKey: row.saveKey }
@@ -198,7 +194,6 @@ export default {
         })
         .then(res => {
           if (res.status === 200) {
-            console.log(res);
             // [...this.tableData] = res.data;
             this.getData();
             this.newData ={};
@@ -246,12 +241,14 @@ export default {
 <style lang = "scss" scoped>
 .apartmentWrap {
   width: 1300px;
-  height: 610px;
+  /* height: 610px; */
+  min-height:610px;
   margin: 0 auto;
   .apartmentContent {
     position: relative;
     /* border: 1px solid black; */
-    height: 610px;
+    /* height: 610px; */
+    min-height:610px;
     .publicButton {
       position: absolute;
       right: 10px;

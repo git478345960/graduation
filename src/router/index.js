@@ -135,7 +135,7 @@ export default new Router({
       component:personal
     },
     {
-      path:'/experienceDetail/:id?',
+      path:'/experienceDetail/:id?/:userKey?',
       name:'experienceDetail',
       component:experienceDetail
     },

@@ -8,7 +8,7 @@
       <!-- <ul> -->
         <!-- <li @click="jump(item.id)" v-for="(item,index) in dataList" :key="index"><a href="#"><h1>{{item.title}}</h1><p>{{item.content}}</p></a></li> -->
       <!-- </ul> -->
-      <router-link v-for="(item,index) in dataList" :key="index" class = "nameList" :to = "{name:'experienceDetail',params:{id:item.id}}">
+      <router-link v-for="(item,index) in dataList" :key="index" class = "nameList" :to = "{name:'experienceDetail',params:{id:item.id,userKey:userKey}}">
         <h1>{{index+1}}.{{item.title}}</h1>
         <p>{{item.content}}</p>
         </router-link>
@@ -22,15 +22,15 @@ export default {
   data(){
     return {
       dataList : [],
+      userKey:'',
     }
   },
    created:function(){
+     this.userKey = this.$route.params.userKey;
      api.getExperience().then(res => {
        if(res.status === 200){
         //  this.dataList = res.data;
-         console.log(res.data);
          [...this.dataList] = res.data;
-         console.log(this.dataList)
         //  console.log(this.dataList);
        }
      })
@@ -49,7 +49,6 @@ export default {
      methods:{
        jump(id){
          api.getDetailExperience({id:id}).then(res =>{
-           console.log(res);
          })
        }
      }

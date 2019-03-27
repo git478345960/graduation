@@ -30,7 +30,7 @@
               </el-row>
               <el-row class="introduce">
                 <h1>公司信息</h1>
-                <p v-for="(item,index) of companyInfoArray" :key="index" style="height:30px;">{{index+1}}.{{item}}。</p>
+                <p v-for="(item,index) of companyInfoArray" :key="index" style="padding-bottom:10px;">{{index+1}}.{{item}}。</p>
               </el-row>
             </el-col>
             <el-col :span="5" class="contentRight">
@@ -144,7 +144,6 @@ export default {
             this.data = Object.assign({},res.data);
             this.nowData = Object.assign({},res.data);
             this.companyInfoArray = this.data.companyInfo ? this.data.companyInfo.split('。').slice(0,-1) : this.data.companyInfo;
-            console.log(this.companyInfoArray)
           })
     }
   },

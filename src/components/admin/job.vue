@@ -64,7 +64,6 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.nowData = Object.assign({},row);
-      console.log(index, row);
       this.editorFlag = true;
 
       var mo = function(e) {
@@ -75,7 +74,6 @@ export default {
 
     },
     handleRead(index, row){
-      console.log(index,row);
       this.$router.push({name:'searchDetail',params:{userKey:this.$route.params.userKey,id:row.id}});
     },
     handleDelete(index, row) {
@@ -98,9 +96,7 @@ export default {
   
   created: function() {
     this.keyFlag = this.$route.params.userKey ? true : false;
-    console.log(this.keyFlag);
     api.getPartTimeInfos().then(res => {
-      console.log(res);
       if (res.status === 200) {
         [...this.tableData] = res.data;
       }
@@ -112,12 +108,12 @@ export default {
 <style lang = "scss" scoped>
 .apartmentWrap {
   width: 1300px;
-  height: 610px;
+  min-height: 610px;
   margin: 0 auto;
   .apartmentContent {
     position: relative;
     /* border: 1px solid black; */
-    height: 610px;
+    min-height: 610px;
     .publicButton{
       position: absolute;
       right:10px;

@@ -87,14 +87,10 @@ export default {
       document.removeEventListener("touchmove", mo, false);
     },
     getResume() {
-      console.log(this.userKey)
-      console.log(this.id);
       api.getResumes({ id: this.id }).then(res => {
         if (res.status === 200) {
-          console.log(res);
           this.form = Object.assign({}, res.data);
           this.form2 = Object.assign({}, this.form);
-          console.log(this.form);
         }
       });
     },

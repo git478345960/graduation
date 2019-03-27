@@ -91,7 +91,6 @@ export default{
             })
         },
         toOthers(){
-            console.log(this.$route.params);
             this.$router.push({name:'searchContent',params:{userKey:this.$route.params.userKey,hiring:this.searchWord}});
         }
        

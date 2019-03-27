@@ -71,7 +71,6 @@ export default {
   created: function() {
     this.hiring = this.$route.params.hiring;
     this.userKey=this.$route.params.userKey;
-    console.log(this.userKey);
     api.getPartTimeInfo({ hiring: this.hiring }).then(res => {
       if (res.status === 200) {
         [...this.dataList] = res.data;

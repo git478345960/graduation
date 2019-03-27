@@ -98,7 +98,6 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.nowData = Object.assign({},row);
-      console.log(index, row);
       this.editorFlag = true;
 
       var mo = function(e) {
@@ -109,7 +108,6 @@ export default {
 
     },
     handleDelete(index, row) {
-      console.log(index, row);
       // console.log(removeMessageInfo(row.id));
       api.removeMessageInfo({id:row.id})
       .then(res=>{
@@ -118,7 +116,6 @@ export default {
     },
     handleRead(index, row) {
       this.nowData = row;
-      console.log(this.nowData.id);
       this.$router.push({path:'messageDetail',query:{id:this.nowData.id}});
     },
      handleSizeChange: function(size) {
@@ -181,7 +178,6 @@ export default {
   
   created: function() {
     api.getMessageInfo().then(res => {
-      console.log(res);
       if (res.status === 200) {
         [...this.tableData] = res.data;
       }

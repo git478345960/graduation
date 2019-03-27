@@ -28,7 +28,6 @@ export default {
                 userName: this.username,
                 password: this.passWord
             }).then(res => {
-              console.log(res);
                 if (res.data.status == 'success') {
                     // this.$store.dispatch('setUser', this.username);
                     this.userKey = res.data.userKey;

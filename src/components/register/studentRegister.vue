@@ -44,7 +44,6 @@ export default {
               let that = this;
               clearTimeout(t);
               t = setTimeout(function(){
-                console.log(that.$router);
                 that.$router.push({name:'login'});//跳转哪一个路由
               },2000)
             }

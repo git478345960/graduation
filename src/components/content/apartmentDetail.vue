@@ -67,7 +67,6 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.nowData = Object.assign({}, row);
-      console.log(index, row);
       this.editorFlag = true;
 
       var mo = function(e) {
@@ -77,14 +76,12 @@ export default {
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
     },
     handleDelete(index, row) {
-      console.log(index, row);
       // console.log(removeMessageInfo(row.id));
       api.removePartTimeInfo({ id: row.id }).then(res => {
         this.getData();
       });
     },
     handleRead(index, row) {
-      console.log(row);
       let routeData = this.$router.resolve({
         name: "apartPersonal",
         query: { id: row.id }       
@@ -138,7 +135,6 @@ export default {
   },
 
   created: function() {
-    console.log(this.$route.params.userKey);
     this.saveKey = this.$route.params.saveKey;
     this.getData();
   }

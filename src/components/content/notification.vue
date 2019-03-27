@@ -24,11 +24,9 @@ export default {
     }
   },
   created:function(){
-    console.log(this.$route.params);
     api.getMessageInfo().then(res =>{
       [...this.newList] = res.data;
       // console.log(res.data);
-      console.log(this.newList);
     })
   },
   methods:{

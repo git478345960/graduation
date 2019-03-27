@@ -27,7 +27,6 @@ export default {
     api.getMessageInfo().then(res =>{
       [...this.newList] = res.data;
       // console.log(res.data);
-      console.log(this.newList);
     })
   },
   methods:{

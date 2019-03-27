@@ -18,7 +18,7 @@
           <el-row>
             <el-col :span="18" class="colDetail">
               <el-row style="min-height:200px;">
-                <h4 class="detailTitle">职位诱惑:</h4>
+                <h4 class="detailTitle">任职要求:</h4>
                 <p v-for="(item,index) of dataArray.requirements" :key=index>{{index+1}}.{{item}}。</p>
               </el-row>
               <el-row style="min-height:200px;">
@@ -72,8 +72,6 @@ export default {
   },
   methods:{
       open() {
-        console.log(this.id);
-        console.log(this.userKey);
         api.summitResume({
           id:this.id,
           userKey:this.userKey
@@ -91,8 +89,6 @@ export default {
     api.getPartTimeInfo({id:this.id})
             .then(res => {
                 if(res.status === 200){
-                    console.log(res);
-                    console.log(this.$route.params);
                     this.dataList = res.data;
                     [...this.dataArray.requirements] = this.dataList.requirement ?this.dataList.requirement.split('。').slice(0,-1) : this.dataList.requirement;
                     [...this.dataArray.responsibility] = this.dataList.responsibility ? this.dataList.responsibility.split('。').slice(0,-1) :this.dataList.responsibility;
